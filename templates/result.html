@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Face Analysis Result</title>
+</head>
+<body>
+    <h1>Face Analysis Result</h1>
+
+    <img src="{% url 'download_file' file_hash=image.hash %}" alt="Uploaded face" style="max-width: 500px;">
+
+    <h2>Analysis:</h2>
+    <ul>
+        <li><strong>Age:</strong> {{ analysis.age }} years</li>
+        <li><strong>Gender:</strong> {{ analysis.gender }} (confidence: {{ analysis.gender_confidence|floatformat:2 }})</li>
+        <li><strong>Dominant Emotion:</strong> {{ analysis.dominant_emotion }} (confidence: {{ analysis.emotion.analysis.dominant_emotion|floatformat:2 }})</li>
+        <li><strong>Emotion Breakdown:</strong>
+            <ul>
+                <li>Angry: {{ analysis.emotion.angry|floatformat:2 }}%</li>
+                <li>Disgust: {{ analysis.emotion.disgust|floatformat:2 }}%</li>
+                <li>Fear: {{ analysis.emotion.fear|floatformat:2 }}%</li>
+                <li>Happy: {{ analysis.emotion.happy|floatformat:2 }}%</li>
+                <li>Sad: {{ analysis.emotion.sad|floatformat:2 }}%</li>
+                <li>Surprise: {{ analysis.emotion.surprise|floatformat:2 }}%</li>
+                <li>Neutral: {{ analysis.emotion.neutral|floatformat:2 }}%</li>
+            </ul>
+        </li>
+    </ul>
+
+    <a href="{% url 'home' %}">Analyze another image</a>
+</body>
+</html>
